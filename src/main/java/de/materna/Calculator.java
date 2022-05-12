@@ -8,23 +8,23 @@ import java.util.Scanner;
 
 public class Calculator {
     public static void main(String[] args) {
-        startCalculator();
+        startCalculator(getInput());
     }
 
-    static void startCalculator() {
+    static String getInput() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    static String startCalculator(String input) {
 
         HashMap<String, Double> tempStorage= new HashMap<>();
 
         while (true) {
             
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
-
             if (input.contains("exit")) {
                 break;
             }
-
-
 
             if (input.contains("=")) {
                 int postion = input.indexOf("=");
@@ -44,8 +44,10 @@ public class Calculator {
                     .build()
                     .setVariables(tempStorage);
 
-            System.out.println(expression.evaluate());
+            return Double.toString(expression.evaluate());
+
 
         }
+        return "";
     }
 }
